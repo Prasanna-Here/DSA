@@ -2,9 +2,19 @@
 #include <vector>
 #include <queue>
 using namespace std;
+//Depth First Search
+void dfs(int node,vector<vector<int>> &adj,vector<int> &vis){
+    vis[node]=1;
+    cout<<node<<" ";
+    for(auto neighbour:adj[node]){
+        if(!vis[neighbour]){
+            dfs(neighbour,adj,vis);
+        }
+    }
+}
 
-void bfs(int start,vector<vector<int>> &adj,int n){
-    vector<int> vis(n+1,0);
+//Breadth First Search
+void bfs(int start,vector<vector<int>> &adj,vector<int> &vis){
     queue<int> q;
     q.push(start);
     vis[start]=1;
@@ -43,6 +53,11 @@ int main(){
         cout<<endl;
     }
     
+    vector<int> vis(n+1,0);
     cout<<"BFS Traversal:"<<endl;
-    bfs(1,adj,n);
+    bfs(1,adj,vis);
+
+    fill(vis.begin(), vis.end(), 0);
+    cout<<"\nDFS Traversal:"<<endl;
+    dfs(1,adj,vis);
 }
